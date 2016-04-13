@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import EventNearby from './component/event_nearby';
 import EventSchedule from './component/event_schedule';
+import MapView from './component/mapview';
 import toastr from 'toastr';
 
 class App extends React.Component {
@@ -55,6 +56,7 @@ class App extends React.Component {
           }}
           events = {this.state.event_scheduled}
         />
+        <MapView />
       </div>
     );
   }

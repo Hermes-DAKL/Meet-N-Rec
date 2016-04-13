@@ -6,7 +6,8 @@ const EventScheduledEntryView = (props) => {
       {props.event.event}
       <button onClick = { () => {
         props.onEventDelete(props.event);
-      }}>Delete</button>
+      }}
+      >Delete</button>
     </li>
   );
 };
