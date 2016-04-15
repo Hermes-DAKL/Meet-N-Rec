@@ -6,7 +6,6 @@ import MapView from './component/mapview';
 import SearchBar from './component/search_bar';
 import toastr from 'toastr';
 import ReactBootstrap from 'react-bootstrap';
-import FormView from './component/formview';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,7 +18,10 @@ class App extends React.Component {
         { id: 122, event: 'Baseball', lat: 37.56, lng: -122.42 },
       ],
       event_scheduled: [],
-      form_visibility: 'hide',
+      selectedLocation: {
+        latlng: {lat: 0, lng: 0},
+        noClick: true,
+      },
 
     };
 
@@ -49,16 +51,15 @@ class App extends React.Component {
           }}
           events = {this.state.event_nearby}
         />
-        <MapView events = {this.state.event_nearby} onMapClick = { (coor) => {
-          const self = this;
-          if (this.state.form_visibility === 'hide') {
-            self.setState({ form_visibility: 'show' });
-          } else {
-            self.setState({ form_visibility: 'hide' });            
+        <MapView 
+          selectedLocation = {this.state.selectedLocation} 
+          events = {this.state.event_nearby} 
+          onMapClick = { (coor) => {
+            coor.noClick = false;
+            this.setState({ selectedLocation: coor });
           }
-        }}
+        }
         />
-        <FormView visibility = {this.state.form_visibility} />
         <EventSchedule
           onEventDelete = { (event) => {
             const temp = this.state.event_scheduled;
