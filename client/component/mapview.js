@@ -25,7 +25,7 @@ const MapView = (props) => {
     return (
       <Marker key="FormViewKey" position={clickLocation} >
       <Popup minWidth="400">
-        <div class="input-group">
+        <div className="input-group">
             <span className="input-group-addon" id="eventName">Event Name:</span>
             <input className="form-control" type="text" aria-describedby="basic-addon1" placeholder="Text" />
             <span className="input-group-addon">Max People:</span>
