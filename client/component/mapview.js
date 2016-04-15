@@ -6,6 +6,7 @@ const MapView = (props) => {
   const handleClick = (thing) => {
     props.onMapClick(thing);
   };
+
   const markers = props.events.map((event) => {
     let latlng = [event.lat, event.lng];
     return (
@@ -16,24 +17,37 @@ const MapView = (props) => {
       </Marker>
     );
   });
+  const FormView = () => {
+    let clickLocation = [props.selectedLocation.latlng.lat, props.selectedLocation.latlng.lng];
+    if (props.selectedLocation.noClick) {
+      return;
+    }
+    return (
+      <Marker key="FormViewKey" position={clickLocation} >
+      <Popup minWidth="400">
+        <div class="input-group">
+            <span className="input-group-addon" id="eventName">Event Name:</span>
+            <input className="form-control" type="text" aria-describedby="basic-addon1" placeholder="Text" />
+            <span className="input-group-addon">Max People:</span>
+            <input className="form-control" type="text"placeholder="Text" />
+        </div>
+      </Popup>
+      </Marker>
+    );
+  };
   const position = [37.77, -122.431297];
   return (
-    <Map onclick={handleClick} center={position} zoom={10} className="col-sm-8 MapView">
-      <TileLayer
-        url= {mapURL}
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> &copy; <a href="https://www.mapbox.com/map-feedback/">Mapbox</a>'
-      />
-      {markers}
-    </Map>
+    <div>
+      <Map onclick={handleClick} center={position} zoom={10} className="col-sm-8 MapView">
+        <TileLayer
+          url= {mapURL}
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> &copy; <a href="https://www.mapbox.com/map-feedback/">Mapbox</a>'
+        />
+        {markers}
+        {FormView()}
+      </Map>
+    </div>
   );
 };
 
 export default MapView;
-// render(map, document.getElementById('map-container'));
-
-//      <Marker position={position}>
-//        <Popup>
-//           <span> A pretty CSS3 popup.<br />Easily customizable. </span>
-//         </Popup>
-//       </Marker>
-
