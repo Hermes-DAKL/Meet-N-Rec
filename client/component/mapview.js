@@ -1,12 +1,12 @@
 import React from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import mapURL from '../../config/component/config';
+import FormView from './formview';
 
 const MapView = (props) => {
   const handleClick = (thing) => {
     props.onMapClick(thing);
   };
-
   const markers = props.events.map((event) => {
     let latlng = [event.lat, event.lng];
     return (
@@ -17,27 +17,20 @@ const MapView = (props) => {
       </Marker>
     );
   });
-
-  const FormView = () => {
+  const markerView = () => {
     let clickLocation = [props.selectedLocation.latlng.lat, props.selectedLocation.latlng.lng];
     if (props.selectedLocation.noClick) {
       return;
-    }
+    } 
     return (
       <Marker key="FormViewKey" position={clickLocation} >
-      <Popup minWidth="400">
-        <div className="input-group">
-            <span className="input-group-addon" id="eventName">Event Name:</span>
-            <input className="form-control" type="text" aria-describedby="basic-addon1" placeholder="Text" />
-            <span className="input-group-addon">Max People:</span>
-            <input className="form-control" type="text"placeholder="Text" />
-        </div>
-      </Popup>
+        <Popup minWidth="400">
+          <FormView location={clickLocation} />
+        </Popup>
       </Marker>
     );
   };
 
-  
   const position = [37.77, -122.431297];
   return (
     <div>
@@ -47,7 +40,7 @@ const MapView = (props) => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> &copy; <a href="https://www.mapbox.com/map-feedback/">Mapbox</a>'
         />
         {markers}
-        {FormView()}
+        {markerView()}
       </Map>
     </div>
   );
