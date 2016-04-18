@@ -39,7 +39,6 @@ exports.signup = function(req, res, next) {
 
 
 exports.signin = function(req, res, callback) {
-  console.log(req.body);
   User.findOne({ emailAddress: req.body.emailAddress}, function(err, foundUser) {
 
   if (err) { return callback(err); }

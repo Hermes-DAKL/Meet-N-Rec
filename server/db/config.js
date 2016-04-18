@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-mongoURI = process.env.MONGOLAB_URI || 'mongodb://localhost/meetrekt';
+mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/meetrekt';
 
 mongoose.connect(mongoURI);
 
