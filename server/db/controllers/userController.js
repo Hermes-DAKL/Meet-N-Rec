@@ -20,6 +20,7 @@ exports.signup = function(req, res, next) {
     }
 
     // Else create and save user and email
+    req.body.eventsAttending = [];
     var user = new User(req.body);
     user.save(function(err) {
       if (err) {
@@ -48,6 +49,7 @@ exports.signin = function(req, res, callback) {
     if (err) { return callback(err); }
     if (!isMatch) { return callback(null, false); } 
       return req.session.regenerate(function() {
+//        console.log("uC:51 - This is your cookie: " + JSON.stringify(req.session));
         req.session.user = foundUser;
         res.send({redirect: '/'});
       });
@@ -55,6 +57,32 @@ exports.signin = function(req, res, callback) {
   });
 }
 
+exports.addEvent = function(req, res, callback) {
+  User.findOne({ emailAddress: req.session.user.emailAddress }, function(err, foundUser) {
+      foundUser.eventsAttending.push(req.body.eventID);
+      foundUser.save();
+  });
+}
+
+// exports.getEvent = function (req, res, callback) {
+//   User.findOne({ emailAddress: req.session.emailAddress }, function(err, data) {
+//     if (err) {
+//       return callback(false);
+//     } else {
+//       return callback(data);
+//     }
+//   })
+// }
+
+exports.removeEvent = function(req, res, callback) {
+  User.findOne({ emailAddress: req.session.user.emailAddress }, function(err, foundUser) {
+      foundUser.eventsAttending.splice(foundUser.eventsAttending.indexOf(req.body.eventID), 1);
+      foundUser.save();
+  });
+}
+
+//               {$push: {eventsAttending: req.body.eventID}}, callback);
+// }
 
 var isLoggedIn = function(req) {
   return req.session ? !!req.session.user : false;

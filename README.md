@@ -27,8 +27,8 @@ A web app that provides an easy way to organize recreational activities with peo
 - Node 5.10
 - MongoDB 
 - React 0.14+
-- etc
-- etc
+- Leaftlet 0.11
+
 
 ## Development
 
@@ -42,6 +42,8 @@ sudo npm install -g bower
 npm install
 bower install
 ```
+
+Recommended Linter: ESLint with AirBnB config.
 
 ### Roadmap
 

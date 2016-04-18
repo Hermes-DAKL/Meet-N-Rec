@@ -15,9 +15,12 @@ const EventNearby = (props) => {
       );
   });
   return (
-    <ul style={{ listStyleType: 'none' }} className="col-sm-2 list-inline">
-      {items}
-    </ul>
+    <div className="col-sm-2">
+      <h5>Events nearby</h5>
+      <ul style={{ listStyleType: 'none' }} className="list-inline">
+        {items}
+      </ul>
+    </div>
   );
 };
 

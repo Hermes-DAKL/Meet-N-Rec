@@ -14,9 +14,12 @@ const EventSchedule = (props) => {
     );
   });
   return (
-    <ul style={{ listStyleType: 'none' }} className="col-sm-2">
-      {items}
-    </ul>
+    <div className="col-sm-2">
+      <h5>Your events</h5>
+      <ul style={{ listStyleType: 'none' }} className="list-inline">
+        {items}
+      </ul>
+    </div>
   );
 };
 

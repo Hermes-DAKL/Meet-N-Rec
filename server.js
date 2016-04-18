@@ -49,15 +49,18 @@ app.post('/api/event', function (req, res) {
   });
 });
 
-// app.post('/api/user', function (req, res) {
-//   eventController.addEvent(req.body, function (event) {
-//     if (event) {
-//       res.status(201).send(event);
-//     } else {
-//       res.status(404).send('Did not save');
-//     }
-//   });
-// });
+app.get('/api/user', function (req, res) {
+  userController.getEvent(req, res, function(events) {
+    if (events) {
+      res.status(200).send(events);
+    } else {
+      res.status(404).send('Could not retrieve...');
+    }
+  });
+  
+});
+app.post('/api/user', userController.addEvent);
+app.post('/api/usercancel', userController.removeEvent);
 
 
 
