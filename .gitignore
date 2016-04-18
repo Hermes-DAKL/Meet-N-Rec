@@ -5,3 +5,5 @@ config/component/config.js
 .flooignore
 bundle.js
 .eslintrc.js
+index.bundle.js
+login.bundle.js

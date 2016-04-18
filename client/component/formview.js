@@ -78,7 +78,6 @@ class FormView extends React.Component {
             type="text"
             placeholder="Your Name" />
         </div>
-
         <div className="form-group">
           <label>Location's Name:</label>
           <input 

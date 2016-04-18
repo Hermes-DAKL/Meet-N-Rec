@@ -52,3 +52,9 @@
 .popup {
   font-family: 'Roboto', sans-serif;
 }
+
+.loginForm {
+  width: 400px;
+  float: none;
+  margin: 0 auto;
+}
