@@ -18,11 +18,13 @@ class LoginApp extends React.Component {
         firstName: '',
         lastName: '',
         emailAddress: '',
-        password: '',        
+        password: '',
+        eventsAttending: [],        
       },
     };
   }
 
+  // Validate user credentials
   handleSubmit(event) {
     event.preventDefault();
     $.ajax({
@@ -36,6 +38,7 @@ class LoginApp extends React.Component {
     });
   }
 
+  // Send new user data to server
   handleSignUp(event) {
     event.preventDefault();
     $.ajax({

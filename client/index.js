@@ -11,7 +11,7 @@ import $ from 'jquery';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
+    //state to store data
     this.state = {
       event_nearby: [],
       event_scheduled: [],
@@ -24,6 +24,7 @@ class App extends React.Component {
     };
     // this.getData = this.getData.bind(this);
     this.getData();
+    //this.getSchedule();
   }
 
   // API Call to database for main event_nearby data
@@ -46,11 +47,13 @@ class App extends React.Component {
   }
 
   // API call to post event after click in event_nearby_entryview
-  postSchedule(event) {
+  postSchedule(eventID) {
+    console.log(typeof(eventID));
+    var foo = {eventID: eventID};
     $.ajax({
       method: 'POST',
       url: '/api/user',
-      data: JSON.stringify(event),
+      data: JSON.stringify(foo),
       contentType: 'application/json',
     })
     .done((msg) => {
@@ -58,10 +61,22 @@ class App extends React.Component {
     });
   }
 
+  // getSchedule() {
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: '/api/user',
+  //     contentType: 'application/json',
+  //   })
+  //   .done((data) => {
+  //     console.log(data);
+  //     //self.setState({ event_nearby: data });
+  //   });
+  // }
+
   render() {
     return (
       <div>
-        <h1 className="header">League and Rekt</h1>
+        <h1 className="header">Meet and Rec</h1>
         <SearchBar />
         <EventNearby
           onEventSelect = { (event) => {
@@ -72,7 +87,7 @@ class App extends React.Component {
               const temp = this.state.event_scheduled;
               temp.push(event);
               this.setState({ event_scheduled: temp });
-              // this.postSchedule(event);
+              // this.postSchedule(event._id);
             }
           }}
           events = {this.state.event_nearby}
@@ -92,6 +107,8 @@ class App extends React.Component {
         }
         />
         <EventSchedule
+          events = {this.state.event_scheduled  }
+
           onEventDelete = { (event) => {
             const temp = this.state.event_scheduled;
             for (let i = 0; i < temp.length; i++) {
